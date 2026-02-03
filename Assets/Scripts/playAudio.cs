@@ -15,8 +15,8 @@ public class playAudio : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
-            StartCoroutine(FadeIn(true));
             StopAllCoroutines();
+            StartCoroutine(FadeIn(true));
         }
     }
 
