@@ -11,7 +11,7 @@ public class NPCSpawner : MonoBehaviour
     [Header("Spawn Area")]
     [SerializeField] private Vector3 spawnCenter = Vector3.zero;
     [SerializeField] private bool useTerrainHeight = true;
-    [SerializeField] private LayerMask groundLayer = -1; // Default to everything
+    [SerializeField] private LayerMask groundLayer = -1; 
     [SerializeField] private float raycastHeight = 500f;
 
     [Header("Advanced")]
