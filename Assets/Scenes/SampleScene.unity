@@ -789,7 +789,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1584521354872074, guid: 1d91278d40f69bf428e9546cbdbdcbbe, type: 3}
       propertyPath: m_Name
-      value: Prefab_Mountain_47
+      value: Mountain
       objectReference: {fileID: 0}
     - target: {fileID: 4077621659706392, guid: 1d91278d40f69bf428e9546cbdbdcbbe, type: 3}
       propertyPath: m_LocalScale.y
@@ -943,15 +943,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6013632388104371080, guid: 6e0965b76baec374d9a8e0c82f9033cb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -67
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6013632388104371080, guid: 6e0965b76baec374d9a8e0c82f9033cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6013632388104371080, guid: 6e0965b76baec374d9a8e0c82f9033cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -261
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6013632388104371080, guid: 6e0965b76baec374d9a8e0c82f9033cb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1564,12 +1564,12 @@ SceneRoots:
   - {fileID: 1568416861}
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 1677231856}
   - {fileID: 308026630}
-  - {fileID: 527554220}
-  - {fileID: 973520834}
   - {fileID: 1189503794}
   - {fileID: 1107798222}
   - {fileID: 492244284}
-  - {fileID: 1677231856}
+  - {fileID: 527554220}
+  - {fileID: 973520834}
   - {fileID: 544228814}
   - {fileID: 1203441723}
