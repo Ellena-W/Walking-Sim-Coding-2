@@ -8,7 +8,6 @@ public class Water_Volume : ScriptableRendererFeature
     {
         private Material _material;
         private RTHandle tempRenderTarget;
-        private RTHandle tempRenderTarget2;
 
         public CustomRenderPass(Material mat)
         {
@@ -19,9 +18,8 @@ public class Water_Volume : ScriptableRendererFeature
         {
             var descriptor = renderingData.cameraData.cameraTargetDescriptor;
             descriptor.depthBufferBits = 0;
-            
+
             RenderingUtils.ReAllocateIfNeeded(ref tempRenderTarget, descriptor, name: "_TemporaryColourTexture");
-            RenderingUtils.ReAllocateIfNeeded(ref tempRenderTarget2, descriptor, name: "_TemporaryDepthTexture");
         }
 
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
@@ -29,38 +27,33 @@ public class Water_Volume : ScriptableRendererFeature
             if (renderingData.cameraData.cameraType != CameraType.Reflection)
             {
                 CommandBuffer cmd = CommandBufferPool.Get("Water Volume Pass");
-                
+
                 var source = renderingData.cameraData.renderer.cameraColorTargetHandle;
-                
+
+                // Fixed: Use Blitter.BlitCameraTexture with proper parameters
                 Blitter.BlitCameraTexture(cmd, source, tempRenderTarget, _material, 0);
                 Blitter.BlitCameraTexture(cmd, tempRenderTarget, source);
-                
+
                 context.ExecuteCommandBuffer(cmd);
                 CommandBufferPool.Release(cmd);
             }
         }
 
-        public override void OnCameraCleanup(CommandBuffer cmd)
-        {
-            // Cleanup is handled automatically by RTHandle
-        }
-
         public void Dispose()
         {
             tempRenderTarget?.Release();
-            tempRenderTarget2?.Release();
         }
     }
 
     [System.Serializable]
-    public class _Settings
+    public class WaterSettings
     {
         public Material material = null;
         public RenderPassEvent renderPass = RenderPassEvent.AfterRenderingSkybox;
     }
 
-    public _Settings settings = new _Settings();
-    CustomRenderPass m_ScriptablePass;
+    public WaterSettings settings = new WaterSettings();
+    private CustomRenderPass m_ScriptablePass;
 
     public override void Create()
     {
@@ -74,11 +67,17 @@ public class Water_Volume : ScriptableRendererFeature
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        renderer.EnqueuePass(m_ScriptablePass);
+        if (m_ScriptablePass != null && settings.material != null)
+        {
+            renderer.EnqueuePass(m_ScriptablePass);
+        }
     }
 
     protected override void Dispose(bool disposing)
     {
-        m_ScriptablePass?.Dispose();
+        if (disposing)
+        {
+            m_ScriptablePass?.Dispose();
+        }
     }
 }
